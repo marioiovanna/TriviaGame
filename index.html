@@ -3,61 +3,71 @@
 <head>
     <title>TRIVIA</title>
     <meta charset="utf-8">
-    
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.2.4.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!-- CSS y JAVASCRIPT -->
+    <link rel="stylesheet" type="text/css" href="assets/css/right-bar.css">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <script src="assets/javascript/app.js"></script>
+
 </head>
 <body class="body">
 
 <div class="container-fluid">
-    <div class="row content">
-        <div class="col-sm-3 sidenav text-center">
-            <h1>Trivia Game</h1>
-            <br>
-            <button type="button" class="btn btn-primary start">START</button>
-            <div class="mod">
-            <div class="rigth">Answer Right:<p></p></div>
-            <div class="wrong">Wrong Answer:<p></p></div>
+    <div class="container-fluid">
+        <div class="row content">
+            <div class="col-sm-3 sidenav text-center">
+                <h1>Trivia Game</h1>
+                <br>
+                <button type="button" class="btn btn-primary start">START</button>
+                <div class="mod">
+                    <div class="rigth">Right Answer:</div>
+                    <br>
+                    <div class="wrong">Wrong Answer:</div>
+                </div>
+                <img class="picnav" src='assets/img/flia.png' alt="flinstone">
             </div>
-            <img class="picnav" src='assets/img/flia.png' alt="flinstone">
-        </div>
-
-         <div class="col-sm-1">
-            </div>
-                 
-            <div class="col-sm-7 text-center">
-            <div>
-
-              <img class="head" src="assets/img/head.png" alt="head">
-              
-              <div class="span"></div>
-              <div class="mainbox">
-              <h1 id="timer"></h1>
-              </div>
-              <br>
-              <div class="question">
-              </div>
-              <br>
-              <div class="answer">
-              </div>
-              </div>
 
             <div class="col-sm-1">
             </div>
+            <div class="col-sm-7 text-center">
+                <div>
+                    <img class="head" src="assets/img/head.png" alt="head">
+                    <div class="span">
+                    </div>
+                    <div class="mainbox">
+                        <h1 class="timer"></h1>
+                    </div>
+                    <br>
+                    <div class="question">
+                    </div>
+                    <br>
+                    <div class="answer">
+                    </div>
+                </div>
 
-        <audio class="audioDemo"> 
-          <source src="assets/audio/loveshark.ogg" type="audio/ogg">
-        </audio>
+                <div class="col-sm-1">
+                </div>
 
-          </div>
-     </div>
+                <audio class="audioDemo">
+                    <source src="assets/audio/loveshark.ogg" type="audio/ogg">
+                </audio>
+
+            </div>
+        </div>
+    </div>
 </div>
-
-<footer class="container-fluid">
-</footer>
 
 </body>
 </html>

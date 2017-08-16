@@ -1,8 +1,8 @@
 
 body {
     background-image: url(../img/back.jpg);
-    background-size: 100% 100%;
-    font-family: comic Sans MS;
+    background-size: cover;
+    font-family: "Comic Sans MS", cursive, sans-serif;
 }
 
 .head {
@@ -10,27 +10,7 @@ body {
     display: none;
 }
 
-.start {
-    margin-top: 150px;  
-    width: 210px;
-    height: 110px;
-    font-size: 50px;
-}
-
-.rigth,
-.wrong {
-    display: none;
-    font-size: 25px;
-}
-
-.picnav {
-    margin-top: 100px;
-    display: none;
-    width: 350px;   
-    height: 450px;  
-}
-
-#timer{
+.timer {
     height: 130px;
     margin-top: 10px;
     font-size: 150px;
@@ -46,39 +26,23 @@ body {
     font-weight: bold;
 }
 
-p {
-    font-size: 30px;
-    font-weight: bold;
-    color: white; 
-    text-shadow: -3px 3px black;
-}
-
-.row.content {height: 920px}
-
-.sidenav {
-    background-color: transparent;
-    height: 100%;
+.row.content {
+    height: 920px
 }
 
 h1 {
     margin-top: 80px;
     font-weight: bold;
     font-size: 75px;
-    color:  #FF8C00;
+    color: #FF8C00;
     text-shadow: 7px 7px #000000;
 }
 
 h2 {
-    font-size:35px;
+    font-size: 35px;
     font-weight: bold;
     color: #000000;
-    background-color:   #FAEBD7;
-}
-
-footer {
-    background-color: #555;
-    color: white;
-    padding: 15px;
+    background-color: #FAEBD7;
 }
 
 @media screen and (max-width: 767px) {
@@ -86,5 +50,8 @@ footer {
         height: auto;
         padding: 15px;
     }
-    .row.content {height: auto;}
+
+    .row.content {
+        height: auto;
+    }
 }
