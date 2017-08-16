@@ -45,7 +45,7 @@ var wrongAns = 0;
 
 var startClock = false;
 
-var timer = 1;
+var timer = 2;
 var timercount;
 
 var gamescounts = 0;
@@ -54,7 +54,7 @@ var gamescounts = 0;
 function timeron() {
     $('.mainbox').html('<h1 class="timer"></h1>');
     if (startClock === false) {
-        timer = 1;
+        timer = 2;
         $('.timer').html(timer);
         timercount = setInterval(decrement, 1000);
     }
@@ -81,25 +81,31 @@ function decrement() {
 
             // ADD wrong counter +1
             wrongAns++;
-            gamescounts++;
             $('.countW').html(wrongAns);
 
+            // change question
+            thisquestion++;
+
             // when reach -6 seg stop counting and clear
-        } else if (timer === -6) {
-            stop();
-            clear();
-            populate();
-            gameover();
+        } else if (timer === -3) {
+            gamescounts++;
+            if (gamescounts !== 6) {
+                stop();
+                clear();
+                populate();
+            } else if (gamescounts === 6) {
+                clear();
+                gameover();
+            }
         }
     }
 } //  CLOCK FUNCTION END  <---------------------
 
 function gameover() {
-    if (gamescounts === 2) {
+    if (gamescounts === 6) {
         clear();
         stop();
         $('.span').html('<h1 class="gameover">GAME OVER</h1>' + '<img src="assets/img/back2.jpg" class="thumbnail gameoverimg">')
-
     }
 }
 
@@ -118,22 +124,22 @@ function addspantext() {
 
 function userclick() {
     $('.btnop').on('click', function () {
-        var userclick = ($(this).text());
+        var userclick = $(this).text();
+
+        console.log(userclick);
 
         // CONDICTIONS
         // correct option
         if (userclick === questions[thisquestion].correct) {
             correctAns++;
             // startClock = false;
+            stop();
             clear();
             $('.span').html('<img src="assets/img/right.png" class="rightanswer">').fadeOut(5000, function () {
-                stop();
                 clear();
                 populate();
                 gameover();
             });
-
-            console.log()
 
             // incorrect option 1
         }
@@ -143,7 +149,9 @@ function userclick() {
             clear();
             addspantext();
             $('.next').on('click', function () {
-                clear()
+                clear();
+                populate();
+                gameover();
             })
 
             // incorrect option 2
@@ -154,7 +162,9 @@ function userclick() {
             clear();
             addspantext();
             $('.next').on('click', function () {
-                clear()
+                clear();
+                populate();
+                gameover();
 
             })
         }
@@ -169,13 +179,13 @@ function populate() {
 
     $('.answer').show().html('<button class="btnop">' + questions[thisquestion].correct + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect1 + '</button>');
 
-    $('.question').show().html('<h2>' + questions[thisquestion].text + '</h2>');
+    $('.question').show().append('<h2>' + questions[thisquestion].text + '</h2>');
 
     console.log('pregunta en INDEX ==>  ' + thisquestion);
     console.log(questions[thisquestion].text);
     console.log(questions[thisquestion].correct);
 
-    timeron()
+    timeron();
 }
 
 $(document).ready(function () {
@@ -187,13 +197,17 @@ $(document).ready(function () {
         $('.picnav').show();
         $('.head').show();
 
-        // ADD 0 on counters questions
+        // ADD counters questions
         $('.rigth').show();
         $('.wrong').show();
         $('.audioDemo').trigger('play');
 
         populate();
+        userclick()
+
+
     });
+    userclick()
 
     $(".audioDemo").trigger('pause')
 
