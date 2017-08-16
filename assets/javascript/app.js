@@ -49,6 +49,7 @@ var startClock = false;
 var timer = 10;
 var timercount;
 
+
 // CLOCK TIMER 30 seg  -------------------- >
 function timeron() {
     if (!startClock) {
@@ -65,19 +66,21 @@ function decrement() {
     $('.timer').html(timer);
     timer--;
 
-    if (timer === -1) {
-        $('.timer').hide();
-        $('.span').append('<h1>TIME\'S UP</h1>' + '<p>' + questions[thisquestion].span + '</p>');
-        $('.answer').hide();
-        $('.question').hide();
+    if (startClock === true) {
+        if (timer === -1) {
+            $('.timer').hide();
+            $('.span').append('<h1>TIME\'S UP</h1>' + '<p class="spananswer">' + questions[thisquestion].span + '</p>');
+            $('.answer').hide();
+            $('.question').hide();
 
-        // ADD wrong counter +1
-        wrongAns++;
-        $('.wrong').append(wrongAns);
+            // ADD wrong counter +1
+            wrongAns++;
+            $('.countW').html(wrongAns);
 
-    } else if (timer === -6) {
-        stop();
-        clear();
+        } else if (timer === -6) {
+            stop();
+            clear();
+        }
     }
 } //  CLOCK FUNCTION END  <---------------------
 
@@ -92,23 +95,65 @@ function clear() {
 
 // add legend of the qestion
 function addspantext() {
-    $('.span').append('<p>' + questions[thisquestion].span + '</p>');
+    $('.span').append('<p class="incorrect">INCORRECT</p>' + '<button class="btn btn-success next">NEXT</button>' + '<p class="spananswer">' + questions[thisquestion].span + '</p>');
 }
 
 function populate() {
-    console.log('pregunta en INDEX ==>  ' + thisquestion);
 
     $('.question').append('<h2>' + questions[thisquestion].text + '</h2>');
     $('.answer').append('<button class="btnop" value=0>' + questions[thisquestion].correct + '</button>');
     $('.answer').append('<button class="btnop">' + questions[thisquestion].incorrect + '</button>');
     $('.answer').append('<button class="btnop">' + questions[thisquestion].incorrect1 + '</button>');
 
+    console.log('pregunta en INDEX ==>  ' + thisquestion);
     console.log(questions[thisquestion].text);
     console.log(questions[thisquestion].correct);
+
+    timeron()
+
+    $('button').click(function () {
+        var userclick = ($(this).text());
+        
+        // CONDICTIONS
+        // correct option
+        if (userclick === questions[thisquestion].correct) {
+            correctAns++;
+            startClock = false;
+            clear();
+            $('.span').html('<img src="assets/img/right.png" class="rightanswer">').fadeOut(5000, function () {
+                stop();
+            })
+
+            // incorrect option 1
+        } else if (userclick === questions[thisquestion].incorrect) {
+            wrongAns++;
+            startClock = false;
+            clear();
+            addspantext();
+            $('.next').on('click',function () {
+                clear()
+
+            })
+
+            // incorrect option 2
+        } else if (questions[thisquestion].incorrect1) {
+            wrongAns++;
+            startClock = false;
+            clear();
+            addspantext();
+            $('.next').on('click',function () {
+                clear()
+
+            })
+        }
+
+        // add rigth or wrong NUMBER to page
+        $('.countR').html(correctAns);
+        $('.countW').html(wrongAns);
+    });
 }
 
 $(document).ready(function () {
-
 // START GAME
     $('.start').click(function () {
 
@@ -118,44 +163,12 @@ $(document).ready(function () {
         $('.head').show();
 
         // ADD 0 on counters questions
-        $('.rigth').show().append(correctAns);
-        $('.wrong').show().append(wrongAns);
+        $('.rigth').show();
+        $('.wrong').show();
         $('.audioDemo').trigger('play');
 
-        timeron();
         populate();
 
-        // PRESS BTNS
-        $('button').click(function () {
-            var userclick = ($(this).text());
-            // CONDICTIONS
-                // correct option
-            if (userclick === questions[thisquestion].correct) {
-                correctAns++;
-                clear();
-                stop();
-                timeron();
-                populate();
-
-                // incorrect option 1
-            } else if (userclick === questions[thisquestion].incorrect) {
-                wrongAns++;
-                addspantext();
-
-                // incorrect option 2
-            } else if (questions[thisquestion].incorrect1) {
-                wrongAns++;
-                addspantext();
-            }
-
-            // add rigth or wrong NUMBER to page
-            $('.rigth').append(correctAns);
-            $('.wrong').append(wrongAns);
-
-            console.log('wrongs  ' + wrongAns);
-            console.log('wins  ' + correctAns);
-            console.log('time ' + startClock);
-        });
     });
 
     $(".audioDemo").trigger('pause')
