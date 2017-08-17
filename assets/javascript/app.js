@@ -105,7 +105,7 @@ function gameover() {
     if (gamescounts === 6) {
         clear();
         stop();
-        $('.span').html('<h1 class="gameover">GAME OVER</h1>' + '<img src="assets/img/back2.jpg" class="thumbnail gameoverimg">')
+        $('.span').html('<h1 class="gameover">GAME OVER</h1>' + '<img src="assets/img/back2.jpg" class="thumbnail gameoverimg">');
 
         // show finals answers
         if (wrongAns > correctAns) {
@@ -131,9 +131,8 @@ function addspantext() {
 }
 
 function populate() {
-
     // create buttons with user options. Correct and Incorrect
-    $('.answer').show().html('<button class="btnop">' + questions[thisquestion].correct + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect1 + '</button>');
+    $('.answer').html('<button class="btnop">' + questions[thisquestion].correct + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect1 + '</button>');
 
     $('.question').show().append('<h2>' + questions[thisquestion].text + '</h2>');
 
