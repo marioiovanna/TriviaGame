@@ -106,6 +106,14 @@ function gameover() {
         clear();
         stop();
         $('.span').html('<h1 class="gameover">GAME OVER</h1>' + '<img src="assets/img/back2.jpg" class="thumbnail gameoverimg">')
+
+        // show finals answers
+        if (wrongAns > correctAns) {
+            $('.wrong').css('color', 'red').css('font-size', '55px')
+        }
+        else if (wrongAns < correctAns) {
+            $('.rigth').css('color', 'green').css('font-size', '55px')
+        }
     }
 }
 
@@ -122,73 +130,62 @@ function addspantext() {
     $('.span').append('<p class="incorrect">INCORRECT</p>' + '<button class="btn btn-success next">NEXT</button>' + '<p class="spananswer">' + questions[thisquestion].span + '</p>');
 }
 
-function userclick() {
+function populate() {
+
+    // create buttons with user options. Correct and Incorrect
+    $('.answer').show().html('<button class="btnop">' + questions[thisquestion].correct + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect1 + '</button>');
+
+    $('.question').show().append('<h2>' + questions[thisquestion].text + '</h2>');
+
+    // call timer on and display ...
+    timeron();
+
+    // on user click btns conditions
     $('.btnop').on('click', function () {
         var userclick = $(this).text();
 
-        console.log(userclick);
-
-        // CONDICTIONS
         // correct option
         if (userclick === questions[thisquestion].correct) {
             correctAns++;
-            // startClock = false;
+            thisquestion++;
+            gamescounts++;
             stop();
             clear();
-            $('.span').html('<img src="assets/img/right.png" class="rightanswer">').fadeOut(5000, function () {
-                clear();
-                populate();
-                gameover();
+            $('.rightanswer').show().fadeOut(3000, function () {
+                if (gamescounts !== 6) {
+                    populate()
+                } else {
+                    gameover();
+                }
             });
-
-            // incorrect option 1
         }
-        else if (userclick === questions[thisquestion].incorrect) {
+        // incorrect options
+        else if (userclick === questions[thisquestion].incorrect || questions[thisquestion].incorrect1) {
             wrongAns++;
-            startClock = false;
+            gamescounts++;
+            thisquestion++;
+            stop();
             clear();
-            addspantext();
-            $('.next').on('click', function () {
-                clear();
-                populate();
+            if (gamescounts !== 6) {
+                addspantext();
+                $('.next').on('click', function () {
+                    clear();
+                    populate();
+                })
+            }
+            else {
                 gameover();
-            })
-
-            // incorrect option 2
+            }
         }
-        else if (questions[thisquestion].incorrect1) {
-            wrongAns++;
-            startClock = false;
-            clear();
-            addspantext();
-            $('.next').on('click', function () {
-                clear();
-                populate();
-                gameover();
-
-            })
-        }
-
         // add rigth or wrong NUMBER to page
         $('.countR').html(correctAns);
         $('.countW').html(wrongAns);
     });
 }
 
-function populate() {
-
-    $('.answer').show().html('<button class="btnop">' + questions[thisquestion].correct + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect + '</button>').append('<button class="btnop">' + questions[thisquestion].incorrect1 + '</button>');
-
-    $('.question').show().append('<h2>' + questions[thisquestion].text + '</h2>');
-
-    console.log('pregunta en INDEX ==>  ' + thisquestion);
-    console.log(questions[thisquestion].text);
-    console.log(questions[thisquestion].correct);
-
-    timeron();
-}
-
 $(document).ready(function () {
+
+    $('.rightanswer').hide()
 // START GAME
     $('.start').on('click', function () {
 
@@ -203,14 +200,9 @@ $(document).ready(function () {
         $('.audioDemo').trigger('play');
 
         populate();
-        userclick()
-
-
     });
-    userclick()
 
     $(".audioDemo").trigger('pause')
-
 });
 
 
