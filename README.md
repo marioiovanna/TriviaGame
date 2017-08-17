@@ -22,7 +22,7 @@ On the center of the screen we will find the **TIMER**, **QUESTION** and **OPTIO
 Now base on the descicion that we make is what will happend...
 
 ##
-#### Decisions 
+### Decisions 
 If we answer the question __*Correct*__, the screen will display to PEDRO img ...
 ![alt text](https://github.com/marioiovanna/TriviaGame/blob/master/assets/img/game-screens/correct.PNG) 
 
@@ -34,9 +34,12 @@ Now if we don't make any descision and the time go to 0, the screen will show us
 ![alt text](https://github.com/marioiovanna/TriviaGame/blob/master/assets/img/game-screens/timesup.PNG) 
 
 # 
-#### End Game
+### End Game
 After the 6 questions the counter will display and show you your results ...
 
 ![alt text](https://github.com/marioiovanna/TriviaGame/blob/master/assets/img/game-screens/countercorrect.PNG) ![alt text](https://github.com/marioiovanna/TriviaGame/blob/master/assets/img/game-screens/counterwrong.PNG) 
 
 Thanks!
+
+Link:  https://marioiovanna.github.io/TriviaGame/
+
