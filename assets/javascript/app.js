@@ -45,7 +45,7 @@ var wrongAns = 0;
 
 var startClock = false;
 
-var timer = 2;
+var timer = 15;
 var timercount;
 
 var gamescounts = 0;
@@ -54,7 +54,7 @@ var gamescounts = 0;
 function timeron() {
     $('.mainbox').html('<h1 class="timer"></h1>');
     if (startClock === false) {
-        timer = 2;
+        timer = 15;
         $('.timer').html(timer);
         timercount = setInterval(decrement, 1000);
     }
@@ -68,16 +68,15 @@ function stop() {
 // function decrement clock
 function decrement() {
     // trigger timer less counting
-    $('.timer').html(timer);
     timer--;
+    $('.timer').html(timer);
 
     if (startClock === true) {
         // when reach -1 seg add this to screen
-        if (timer === -1) {
+        if (timer === 0) {
+            clear();
             $('.timer').hide();
             $('.span').append('<h1>TIME\'S UP</h1>' + '<p class="spananswer">' + questions[thisquestion].span + '</p>');
-            $('.answer').hide();
-            $('.question').hide();
 
             // ADD wrong counter +1
             wrongAns++;
@@ -87,7 +86,7 @@ function decrement() {
             thisquestion++;
 
             // when reach -6 seg stop counting and clear
-        } else if (timer === -3) {
+        } else if (timer === -6) {
             gamescounts++;
             if (gamescounts !== 6) {
                 stop();
